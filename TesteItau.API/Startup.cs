@@ -30,7 +30,7 @@ namespace TesteItau.API
         {
             services.AddControllers();
 
-            string mySqlConnection = Configuration.GetConnectionString("AcessureContext");
+            string mySqlConnection = Configuration.GetConnectionString("TesteContext");
             services.AddDbContextPool<AppDbContext>(options =>
                 options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection))
             );
