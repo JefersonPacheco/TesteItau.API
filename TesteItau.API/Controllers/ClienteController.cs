@@ -148,10 +148,10 @@ namespace TesteItau.API.Controllers
             {
                 return await _context.cliente
                                      .Include(x => x.telefone)
-                                     .Where(x => (!cliente.nome.Equals("") && x.nome.Contains(cliente.nome)) ||
-                                                 (!cliente.sobrenome.Equals("") && x.sobrenome.Contains(cliente.sobrenome)) ||
-                                                 (!cliente.cpf.Equals("") && x.cpf == cliente.cpf))
-                                                 .ToListAsync();
+                                     .Where(x => (string.IsNullOrEmpty(cliente.nome) || x.nome.Contains(cliente.nome)) &&
+                                                 (string.IsNullOrEmpty(cliente.sobrenome) || x.sobrenome.Contains(cliente.sobrenome)) &&
+                                                 (string.IsNullOrEmpty(cliente.cpf) || x.cpf == cliente.cpf))
+                                     .ToListAsync();
             }
             catch (Exception)
             {
