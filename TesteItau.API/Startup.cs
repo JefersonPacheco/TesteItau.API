@@ -35,6 +35,11 @@ namespace TesteItau.API
                 options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection))
             );
 
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+            });
+
             services.AddCors(c =>
             {
                 c.AddPolicy("CorsPolicy", 
