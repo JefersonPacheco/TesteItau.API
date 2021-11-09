@@ -109,7 +109,7 @@ namespace TesteItau.API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
+        public async Task<ActionResult<Cliente>> PostCliente([FromBody] Cliente cliente)
         {
             var validacaoCliente = ValidarCliente(cliente);
             if (!validacaoCliente.Equals("Ok"))
@@ -137,7 +137,7 @@ namespace TesteItau.API.Controllers
 
         [HttpPost]
         [Route("pesquisar")]
-        public async Task<IEnumerable<Cliente>> PesquisarCliente(Cliente cliente)
+        public async Task<IEnumerable<Cliente>> PesquisarCliente([FromBody] Cliente cliente)
         {
             if (cliente == null)
             {
