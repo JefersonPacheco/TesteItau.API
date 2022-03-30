@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TesteItau.API.Context;
-using TesteItau.API.Domain;
 using TesteItau.API.Models;
 
 namespace TesteItau.API.Controllers
@@ -17,21 +16,19 @@ namespace TesteItau.API.Controllers
     public class ClienteController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly ClienteDomain clienteDomain;
 
         public ClienteController(AppDbContext context)
         {
             _context = context;
-            clienteDomain = new ClienteDomain(context);
         }
 
         // GET: api/Cliente
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
+        public async Task<ActionResult<IEnumerable<Cliente>>> Getclientes()
         {
             try
             {
-                return Ok(await clienteDomain.getAllClientes());
+                return await _context.cliente.Include(x => x.telefone).ToListAsync();
             }
             catch (Exception ex)
             {
